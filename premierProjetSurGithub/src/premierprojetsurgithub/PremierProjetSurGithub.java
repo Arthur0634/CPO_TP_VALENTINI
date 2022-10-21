@@ -15,6 +15,10 @@ public class PremierProjetSurGithub {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        // affichage d'un message de bienvenue
+        System.out.println("Hello");
+        
     }
     
 }
