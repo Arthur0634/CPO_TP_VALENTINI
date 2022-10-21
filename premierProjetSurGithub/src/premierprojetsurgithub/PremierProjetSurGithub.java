@@ -19,6 +19,10 @@ public class PremierProjetSurGithub {
         // affichage d'un message de bienvenue
         System.out.println("Hello");
         
+        
+        // affichage d'un message de au revoir
+        System.out.println("Au revoir");
+        
     }
     
 }
