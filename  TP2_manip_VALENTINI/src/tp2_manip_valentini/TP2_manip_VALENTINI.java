@@ -4,7 +4,7 @@
  */
 package tp2_manip_valentini;
 
-/**
+/***
  *
  * @author arthu
  */
@@ -26,6 +26,13 @@ public class TP2_manip_VALENTINI {
         System.out.println("nb de calories de Assiette 1 : " + assiette1.nbcalories) ;
         System.out.println("nb de calories de Assiette 2 : " + assiette2.nbcalories) ;
         
+        //Moussaka assiette666 = assiette1 ; la ligne n'est pas correcte car l'assiette 1 est une tartiflette et non une moussaka
+        //Moussaka assiette667 = new Tartiflette() ; la ligne n'est pas correcte car on cree une tartiflette pour une assiette de moussaka
+        
+    Moussaka Tab [] = new Moussaka[10];
+    for (int i=0;i<10;i++){
+        Tab[i]=new Moussaka(i);
+        }
 
     }
     
