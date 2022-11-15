@@ -36,11 +36,11 @@ public class TP3_heritage {
         magicien Garcimore=new magicien("Garcimore",44,false);
         Guerrier Conan=new Guerrier("Conan", 78,false);
         Guerrier Lannister=new Guerrier("Lannister", 45, true);
-        ArrayList<personnage> tab= new ArrayList<personnage>();
-        tab.add(Gandalf);
-        tab.add(Garcimore);
-        tab.add(Conan);
-        tab.add(Lannister);
+        ArrayList<personnage> tab2= new ArrayList<personnage>();
+        tab2.add(Gandalf);
+        tab2.add(Garcimore);
+        tab2.add(Conan);
+        tab2.add(Lannister);
         
         
         
