@@ -20,12 +20,7 @@ public CelluleDeGrille ()   {   //on affecter des valeurs de bases
         avoirDesintegrateur=false;
     }
 public boolean presenceJeton () {  //permet de savoir si le jeton est present ou non
-    if (jetonCourant==null) {
-        return false;
-    }
-    else {
-        return true;
-    }
+        return jetonCourant != null;
                   
 }
 
@@ -34,6 +29,14 @@ public void affecterJeton(Jeton jeton){
 
 }
 
+public String lireCouleurDuJeton () {
+    if (jetonCourant !=null){ //on verifie que le jeton est bien présent 
+        return jetonCourant.lireCouleur();
+    }
+    else {
+        return "vide";
+    }
+}
 
 
 }
