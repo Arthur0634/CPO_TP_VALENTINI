@@ -17,6 +17,7 @@ public class SUPER_PUISSANCE_4_MOUSSALLY_VALENTINI {
     public static void main(String[] args) {
         Jeton Arthur = new Jeton("Jaune");
         // TODO code application logic here
+        System.out.println(Arthur);
     }
     
 }
