@@ -38,6 +38,13 @@ public String lireCouleurDuJeton () {
     }
 }
 
+public Jeton recupererJeton() { //on pense a creer une variable temporaire pour permettre de conserver le jeton
+        Jeton jeton_enleve;
+        jeton_enleve = jetonCourant;
+        jetonCourant=null;
+        return jeton_enleve;
+}
+
 
 }
     
