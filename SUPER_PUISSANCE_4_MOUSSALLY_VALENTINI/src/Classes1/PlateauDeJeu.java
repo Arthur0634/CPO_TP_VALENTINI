@@ -25,8 +25,29 @@ public  int ajouterJetonDansColonne(Jeton jeton, int colonne){
     }
 
 public boolean grilleRemplie(){
+    for (int i = 0;i<6;i++){//on parcours les lignes du tableau une par une
+        for (int j = 0;j<7;j++){//on parcours les colonne du tableau une par une
+            if (grille[i][j].presenceJeton()==false){
+                    return false; 
+            }        
+        }
+    }
+    return true;
     
     
 }
+public String lireCouleurDuJeton(int x, int y){
+    return grille[x][y].lireCouleurDuJeton();
+}
+
+public boolean ligneGagnantePourCouleur(String){
+    for (int i = 0;i<3;i++){
+        for (int j = 0;j<7;j++){
+            if(lireCouleurDuJeton(i,j)==lireCouleurDuJeton(i+1,j)==.lireCouleurDuJeton(i+2,j)==.lireCouleurDuJeton(i+3,j)){
+        }
+    }
+   
+} 
+
 
 }
