@@ -65,6 +65,32 @@ public boolean colonneGagnantePourCouleur(String couleur){
          return false; //si on n'a trouve aucune case gagnante, on retourne false
      }
 
+public boolean diagonaleMontanteGagnantePourCouleur(String couleur){
+         for (int i=0;i<3;i++){//on parcours les colonnes du tableau une par une en allant jusqu'a la quatrieme colonne car il faut un allignement de 4 jetons de meme couleur et apres la 4 case de la colonne ce n'est plus possible
+             for (int j=0;j<2;j++){//on parcours les lignes du tableau une par une sans depasser la troiseme car apres on ne peut pas avoir 4 cases alignées de meme couleur
+                 
+                if ( grille[j][i].lireCouleurDuJeton().equals(couleur) && grille[j+1][i+1].lireCouleurDuJeton().equals(couleur) && grille[j+2][i+2].lireCouleurDuJeton().equals(couleur) && grille[j+3][i+3].lireCouleurDuJeton().equals(couleur)){ //on verifie si les 4 aligne sur la meme colonne sont de meme couleur 
+                    return true; //on retourne true si les 4 cases aligne sont de meme couleur
+                }                                     
+                     
+             }
+         }
+         return false; //si on n'a trouve aucune case gagnante, on retourne false
+     }
+
+public boolean diagonaleDesencanteGagnantePourCouleur(String couleur){
+         for (int i=0;i<3;i++){//on parcours les colonnes du tableau une par une en allant jusqu'a la quatrieme colonne car il faut un allignement de 4 jetons de meme couleur et apres la 4 case de la colonne ce n'est plus possible
+             for (int j=0;j<3;j++){//on parcours les lignes du tableau une par une sans depasser la 4 car il ne êux pas ya voir un alignement de 4 jetons apres la quatrieme
+                 
+                if (grille[j][i].lireCouleurDuJeton().equals(couleur) && grille[j-11][i+1].lireCouleurDuJeton().equals(couleur) && grille[j-2][i+2].lireCouleurDuJeton().equals(couleur) && grille[j-3][i+3].lireCouleurDuJeton().equals(couleur)){ //on verifie si les 4 aligne sur la meme colonne sont de meme couleur 
+                    return true; //on retourne true si les 4 cases alignées sont de meme couleur
+                }                                     
+                     
+             }
+         }
+         return false; //si on n'a trouve aucune case gagnante, on retourne false
+     }
+
 
 
 }
