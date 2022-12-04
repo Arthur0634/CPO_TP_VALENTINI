@@ -33,9 +33,19 @@ public boolean grilleRemplie(){
         }
     }
     return true;//si il y a un jeton on retourne true
-    
-    
 }
+
+public boolean colonneremplies(int a){//cette methode verifie si les colonne sont remplies pour ne pas epasser la quantite maximale de jetons par colonne
+    boolean res=true;
+    for(int i=0; i<6;i++){
+        if (grille[i][a-1].presenceJeton()==false){
+            res=false;
+            return res;
+        }
+    }
+    return res;
+}
+
 public String lireCouleurDuJeton(int x, int y){
     return grille[x][y].lireCouleurDuJeton();// cette fonction permet de lire et de retourner la couleur de la case ij
 }
@@ -90,7 +100,19 @@ public boolean diagonaleDesencanteGagnantePourCouleur(String couleur){
          }
          return false; //si on n'a trouve aucune case gagnante, on retourne false
      }
-
-
-
+public boolean etreGagnantePourCouleur(String a){
+    if(ligneGagnantePourCouleur("a")==true) {
+        return true;
+    }
+    if(colonneGagnantePourCouleur("a")==true) {
+        return true;
+    }
+    if(diagonaleMontanteGagnantePourCouleur("a")==true) {
+        return true;
+    }
+    if(diagonaleDesencanteGagnantePourCouleur("a")==true) {
+        return true;
+    }
+    return false;
+}
 }

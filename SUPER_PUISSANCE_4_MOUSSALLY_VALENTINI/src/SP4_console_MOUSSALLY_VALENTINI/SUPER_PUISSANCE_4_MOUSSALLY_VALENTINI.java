@@ -18,6 +18,6 @@ public class SUPER_PUISSANCE_4_MOUSSALLY_VALENTINI {
         Jeton Arthur = new Jeton("Jaune"); //on test que le jeton prend bien la bonne couleur et retourne la bonne lettre
         // TODO code application logic here
         System.out.println(Arthur);
-    }
+    }8
     
 }
