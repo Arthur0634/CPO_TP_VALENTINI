@@ -15,9 +15,9 @@ public class Partie {
 
     private Joueur[] listeJoueurs = new Joueur[2]; //on cree un tableau de joueurs
     private Joueur joueurCourant;
-    private PlateauDeJeu plateau;
+    private PlateauDeJeu plateau = new PlateauDeJeu();
 
-    public void Partie(Joueur joueur1, Joueur joueur2) {
+    public Partie(Joueur joueur1, Joueur joueur2) {
         listeJoueurs[0] = joueur1;//on place les deux joueur dans le tableau de joueur
         listeJoueurs[1] = joueur2;
     }
@@ -60,43 +60,59 @@ public class Partie {
     }
 
     public void lancerPartie() {
+
         joueurCourant = listeJoueurs[0];//le joueur classé en premier comence
-        boolean fini = false;
-        while (fini == false) { //tant que la partie n'est pas finie
+        boolean fini = true;
+        int test = 0;
+                
+        while (fini) { //tant que la partie n'est pas finie
+            
+            if(test == 1){
+                System.out.println(joueurCourant.ObtenirNom() + " a gagne");
+                plateau.afficherGrilleSurConsole();
+                break;
+            }
             Scanner sc;
             int colonneJouee;
+            
             sc = new Scanner(System.in);
-            plateau.afficherGrilleSurConsole();
-            System.out.println("A " + joueurCourant + " (couleur " + joueurCourant.getCouleur() + "de jouer )");
-            System.out.println(joueurCourant.getReserveJetons().size() + " jetons restant"); //on utilise la fonction size() pour indiquer le nombre de jetons restants
-            System.out.println("Quelle colonne choisissez vous ? (1 a 7)");
-            colonneJouee = sc.nextInt(); //saisie sur l'interface
-            int ligneJouee;
-            ligneJouee = plateau.ajouterJetonDansColonne(joueurCourant.getReserveJetons().get(0), colonneJouee - 1);
-            while (ligneJouee == 99) { //tant que le joueur joue sur une colonne pleine, on lui demande de rejouer
-                System.out.println("Erreur: la colonne est pleine");
-                System.out.println("Quelle colonne choisissez vous ? (1 a 7)");
-                colonneJouee = sc.nextInt(); //saisie sur l'interface
-                ligneJouee = plateau.ajouterJetonDansColonne(joueurCourant.getReserveJetons().get(0), colonneJouee - 1);
-            }
-            System.out.println("pion place dans la ligne numero " + ligneJouee);
-            joueurCourant.jouerJeton();//si la colonne n'est pas pleine on enleve le jeton place de la reserve du joueur 
+            for (int p = 0; p < 2; p++) {
+                
+                
+                plateau.afficherGrilleSurConsole();
+                joueurCourant = listeJoueurs[p];
 
-            if (plateau.etreGagnantePourCouleur(joueurCourant.getCouleur())) {
-                fini = true;
-                System.out.println("Felicitations, le joueur " + joueurCourant + " a gagne");
-            }
-            if (plateau.grilleRemplie()) {
-                System.out.println("La grille est pleine: fin de partie");
-                fini = true;
-            }
+                System.out.println("A " + joueurCourant + " (couleur " + joueurCourant.getCouleur() + " de jouer )");
+                System.out.println(joueurCourant.getReserveJetons().size() + " jetons restant"); //on utilise la fonction size() pour indiquer le nombre de jetons restants
+                System.out.println("Sur qu'elle colonne voulez vous jouez ?"
+                        + "\nEntrer un chiffre entre 1 et 7");
+                int col = sc.nextInt() - 1;
+                if (col > 6 | col < 0) {
+                    System.out.println("Cette colonne n'existe pas, Choisisser une autre colonne");
+                } else {
+                    if (plateau.presenceJeton(0, col)) {
+                        System.out.println("La colonne est plein"
+                                + "\nIl faut choisir une autre colonne");
+                    } else {
+                        for (int i = 5; i > 0; i--) {
+                            if (!plateau.presenceJeton(i, col)) {
+                                int ligne = i;
 
-            if (joueurCourant == listeJoueurs[0]) {
-                joueurCourant = listeJoueurs[1];
-            } else if (joueurCourant == listeJoueurs[1]) {
-                joueurCourant = listeJoueurs[0];
-            } //on inverse le joueur courant
+                            }
+                        }
+                        Jeton jetonCourant = joueurCourant.jouerJeton();
+                        plateau.ajouterJetonDansColonne(jetonCourant, col);
+                        System.out.println("Votre jeton a ete joue");
+
+                    }
+                }
+                if(plateau.etreGagnantePourCouleur(joueurCourant.donnerCouleur())){
+                    
+                    test = 1;
+                    break;
+                }
+            }
         }
-    }
 
+    }
 }
