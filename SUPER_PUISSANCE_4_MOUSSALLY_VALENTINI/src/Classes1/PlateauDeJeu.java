@@ -54,7 +54,25 @@ public class PlateauDeJeu {
         return grille[x][y].lireCouleurDuJeton();// lit et retourne la couleur de la case ij
     }
     
-    
+    public void tasserColonne(int colonne) {
+
+        for (int ligne = 5; ligne > 0; ligne--) {
+
+            if (grille[ligne][colonne].presenceJeton() == false) { //si la case est vide
+
+                if (grille[ligne - 1][colonne].presenceJeton() == true) {//et si sa case au dessus est pleine
+
+                    grille[ligne][colonne].affecterJeton(grille[ligne - 1][colonne].getjetonCourant());//on prend le jeton de la case superieure et on le met dans la case traitee
+
+                    grille[ligne - 1][colonne].supprimerJeton();//et on le supprime de la case au dessu
+
+                }
+
+            }
+
+        }
+
+    }
     public boolean ligneGagnantePourCouleur(String couleur_gagnante) {
         for (int i = 0; i < 6; i++) {//i est la ligne, j la colone
             for (int j = 0; j < 4; j++) {

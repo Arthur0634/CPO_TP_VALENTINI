@@ -53,7 +53,9 @@ public class Joueur {
         reserveJetons.remove(a-1);
         return j;
     }
+    
 
+    
     public String getCouleur() {
         return couleur;
     }

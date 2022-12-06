@@ -92,6 +92,10 @@ public void activerTrouNoir() {
     supprimerJeton();
     supprimerTrouNoir();
 }
+
+public Jeton getjetonCourant() {
+    return jetonCourant;
+}
     @Override
     public String toString() {
         if (jetonCourant != null) {

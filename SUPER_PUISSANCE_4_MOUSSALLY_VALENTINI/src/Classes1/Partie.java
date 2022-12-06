@@ -63,6 +63,7 @@ public class Partie {
 
         joueurCourant = listeJoueurs[0];//le joueur classé en premier comence
         boolean fini = true;
+        boolean recupOK = false;
         int test = 0;
 
         while (fini) { //tant que la partie n'est pas finie
@@ -108,12 +109,54 @@ public class Partie {
                         }
                         Jeton jetonCourant = joueurCourant.jouerJeton();
                         plateau.ajouterJetonDansColonne(jetonCourant, col);
-                        System.out.println("Votre jeton a ete joue");
+                        System.out.println("Votre jeton a bien ete joue");
 
                     }
 
                 }
                 if (rep == 2) {
+                    int ligneJouee = 9; //idee empruntée 
+                    colonneJouee = 9; //pareil
+
+                    recupOK = false;
+
+                    while (recupOK == false) {
+
+                        recupOK = true;//on part du principe que le joueur veut recuperer une case valide
+
+                        System.out.println("Sur quelle colonne est le jeton que vous voulez enlever (1 a 7)?");
+
+                        colonneJouee = sc.nextInt();
+
+                        System.out.println("Sur quelle ligne est le jeton que vous voulez recuperer? (1 a 6)");
+
+                        ligneJouee = sc.nextInt();
+
+                        if ((colonneJouee <= 0) || (colonneJouee >= 8) || (ligneJouee <= 0) || (ligneJouee >= 7)) {  //tant que l'utilisateur comprend que dalle, on lui redemande                      
+
+                            System.out.println("Colonne de 1 a 7 et ligne de 1 a 6");
+
+                            recupOK = false;
+
+                        }
+
+                        if (recupOK == true) { //si on a passe la premiere verification
+
+                            if (plateau.lireCouleurDuJeton(ligneJouee - 1, colonneJouee - 1) != joueurCourant.getCouleur()) { //tant que le joueur ne joue pas sur un jeton qu'il possede
+
+                                System.out.println("Il n'y a pas de jeton a vous sur  cette case.");
+
+                                recupOK = false;
+
+                            }
+
+                        }
+
+                    }
+
+                    joueurCourant.ajouterJeton(plateau.recupererJeton(ligneJouee - 1, colonneJouee - 1)); //on enleve le jeton et on le redonne au joueur
+
+                    plateau.tasserColonne(colonneJouee - 1);
 
                 }
 
