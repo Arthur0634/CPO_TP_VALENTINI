@@ -11,17 +11,18 @@ package Classes1;
  */
 public class CelluleDeGrille {
     Jeton jetonCourant;
-    private boolean avoirTrouNoir;  //on creer nos variables
+    private boolean avoirTrouNoir;
     private boolean avoirDesintegrateur;
+
     
-public CelluleDeGrille ()   {   //on affecter des valeurs de bases
-        jetonCourant = null;
-        avoirTrouNoir= false;
-        avoirDesintegrateur=false;
+public CelluleDeGrille (Jeton j)   {   //on affecte des valeurs de bases
+        jetonCourant = j;
     }
 public boolean presenceJeton () {  //permet de savoir si le jeton est present ou non
-        return jetonCourant != null;
-                  
+        if(jetonCourant != null){
+            return true;
+        }                 
+        return false;
 }
 
 public void affecterJeton(Jeton jeton){ 
@@ -44,7 +45,69 @@ public Jeton recupererJeton() { //on pense a creer une variable temporaire pour 
         jetonCourant=null;
         return jeton_enleve;
 }
+
+public void placerTrouNoir() {
+    avoirTrouNoir=true;
+    
+}
+
+public void supprimerTrouNoir() {
+    avoirTrouNoir=false;
+    
+}
+
+public boolean presenceTrouNoir() {
+    if (avoirTrouNoir==false) {
+        return (false);
+    }
+    else {
+        return(true);
+    }
+}
+
+public void supprimerJeton(){
+    jetonCourant=null;
+}
+
+public boolean presenceDesintegrateur() {
+    if (avoirDesintegrateur==false) {
+        return(false);
         
+    }
+    else {
+        return(true);
+    }
+}
+
+public void placerDesintegrateur() {
+    avoirDesintegrateur=true;
+    
+}
+
+public void supprimerDesintegrateur() {
+    avoirDesintegrateur=false;
+}
+
+public void activerTrouNoir() {
+    supprimerJeton();
+    supprimerTrouNoir();
+}
+    @Override
+    public String toString() {
+        if (jetonCourant != null) {
+            if (jetonCourant.lireCouleur().equals("jaune")) {
+                return ("J");
+            }
+            if (jetonCourant.lireCouleur().equals("rouge")) {
+                return ("R");
+            }
+        }
+        
+        
+        return (".");
+
+    }
+
 
 }
     

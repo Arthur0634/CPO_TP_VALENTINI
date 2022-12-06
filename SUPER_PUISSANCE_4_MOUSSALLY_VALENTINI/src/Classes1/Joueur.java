@@ -15,15 +15,15 @@ public class Joueur {
 
     private String nom;
     private String couleur;
-    private ArrayList<Jeton> reserveJetons;
+    private ArrayList<Jeton> reserveJetons = new ArrayList();
     private int nombreDesintegrateurs;
     
     
     
-    public void Joueur (){
+    public Joueur(String name){
     
-        nom="nom joueur pas enccore entré";//indique au joueur si il a rentre son nom
-        couleur="couleur non initialisée";//indique si il a une couleur attribué
+        nom=name;
+
     }
     
     
@@ -37,7 +37,7 @@ public class Joueur {
     
     
     public int nombreDeJetons(){
-        int taille = reserveJetons.size();//notre taille de tableau designe le nombre d ejtons comme il y a un jeton par case 
+        int taille = reserveJetons.size();//la taille du tableau correspond au nombre de jetons car on a un jeton par case 
         return taille;
     }
     
@@ -49,8 +49,23 @@ public class Joueur {
     
     public Jeton jouerJeton (){
         int a = nombreDeJetons();
-        Jeton j = reserveJetons.remove(a);
+        Jeton j = reserveJetons.get(a-1);
+        reserveJetons.remove(a-1);
         return j;
     }
+
+    public String getCouleur() {
+        return couleur;
+    }
+
+    public ArrayList<Jeton> getReserveJetons() {
+        return reserveJetons;
+    }
+    
+    public String ObtenirNom(){
+        return(this.nom);
+    }
+
+  
     
 }

@@ -15,9 +15,15 @@ public class SUPER_PUISSANCE_4_MOUSSALLY_VALENTINI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Jeton Arthur = new Jeton("Jaune"); //on test que le jeton prend bien la bonne couleur et retourne la bonne lettre
-        // TODO code application logic here
-        System.out.println(Arthur);
-    }8
+        //Jeton Arthur = new Jeton("Jaune"); //on test que le jeton prend bien la bonne couleur et retourne la bonne lettre
+        //TODO code application logic here
+        //System.out.println(Arthur);
+        Joueur j1=new Joueur ("Arthur");
+        Joueur j2=new Joueur ("Leo");
+        Partie test=new Partie(j1,j2);
+        test.initialiserPartie();
+        test.lancerPartie();
+        
+    }
     
 }

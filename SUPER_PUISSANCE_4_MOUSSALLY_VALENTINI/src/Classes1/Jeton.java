@@ -13,7 +13,7 @@ public class Jeton {
     private String Couleur;
     
     public Jeton (String couleur) {
-        this.Couleur= Couleur;
+        this.Couleur= couleur;
     }
     
     public String lireCouleur() {
