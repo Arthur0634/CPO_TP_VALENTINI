@@ -53,12 +53,114 @@ public class Partie {
         }
     }
 
+    public void placerTrousNoirsEtDesintegrateurs() {
+
+        double alea;
+
+        int ligne;
+
+        int colonne;
+
+        for (int i = 0; i < 3; i++) { //on place d'abord 3 trous noirs et 3 desintegrateurs caches dedans
+
+            alea = Math.random() * 6; //on genere un double aleatoire entre 0 et 6
+
+            ligne = (int) alea; //puis on recupere la partie entiere de ce double pour avoir un indice de ligne aleatoire
+
+            //pareil pour les colonnes
+
+            alea = Math.random() * 7;
+
+            colonne = (int) alea;
+
+            while (plateau.presenceTrouNoir(ligne, colonne) == true) { //tant que les coordonnees tires sont celles d'une case deja remplie, on recommence
+
+                alea = Math.random() * 6;
+
+                ligne = (int) alea;
+
+                alea = Math.random() * 7;
+
+                colonne = (int) alea;
+
+            }
+
+            plateau.placerTrouNoir(ligne ,colonne );
+
+            plateau.placerDesintegrateur(ligne, colonne);
+
+        }
+
+        for (int i = 0; i < 2; i++) {//on place ensuite les 2 desintegrateurs
+
+            alea = Math.random() * 6;
+
+            ligne = (int) alea;
+
+            alea = Math.random() * 7;
+
+            colonne = (int) alea;
+
+            while (plateau.presenceDesintegrateur(ligne, colonne) == true) { //tant que les coordonnees tires sont celles d'une case deja remplie, on recommence
+
+                alea = Math.random() * 6;
+
+                ligne = (int) alea;
+
+                alea = Math.random() * 7;
+
+                colonne = (int) alea;
+
+            }
+
+            plateau.placerDesintegrateur(ligne, colonne);
+
+        }
+
+        for (int i = 0; i < 2; i++) {//on place ensuite les 2 derniers trous noirs
+
+            alea = Math.random() * 6;
+
+            ligne = (int) alea;
+
+            alea = Math.random() * 7;
+
+            colonne = (int) alea;
+
+            while (plateau.presenceDesintegrateur(ligne, colonne) == true || plateau.presenceTrouNoir(ligne, colonne) == true) { //les 2 trous noirs doivent etre poses sur une case sans desintegrateur ni trou noir
+
+                alea = Math.random() * 6;
+
+                ligne = (int) alea;
+
+                alea = Math.random() * 7;
+
+                colonne = (int) alea;
+
+            }
+
+            plateau.placerTrouNoir(ligne, colonne);
+
+        }
+
+    }
+    
+    
+    
+    
+    
+    
     public void initialiserPartie() {
         attribuerCouleurAuxJoueurs();
         creerEtAffecterJeton(listeJoueurs[0]);
         creerEtAffecterJeton(listeJoueurs[1]);
+        placerTrousNoirsEtDesintegrateurs();
     }
 
+    
+    
+    
+    
     public void lancerPartie() {
 
         joueurCourant = listeJoueurs[0];//le joueur classé en premier comence
@@ -75,6 +177,7 @@ public class Partie {
             }
             Scanner sc;
             int colonneJouee;
+            int ligne;
 
             sc = new Scanner(System.in);
             for (int p = 0; p < 2; p++) {
@@ -103,15 +206,21 @@ public class Partie {
                     } else {
                         for (int i = 5; i > 0; i--) {
                             if (!plateau.presenceJeton(i, col)) {
-                                int ligne = i;
+                                ligne = i;
 
                             }
+                            
                         }
                         Jeton jetonCourant = joueurCourant.jouerJeton();
                         plateau.ajouterJetonDansColonne(jetonCourant, col);
                         System.out.println("Votre jeton a bien ete joue");
+                        if (plateau.presenceTrouNoir(ligne ,col)){
+                            plateau.supprimerTrouNoir(ligne, col);
+                            plateau.supprimerJeton(ligne, col);
+                        }
 
                     }
+                    
 
                 }
                 if (rep == 2) {
