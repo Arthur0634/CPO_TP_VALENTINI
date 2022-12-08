@@ -133,10 +133,21 @@ public class PlateauDeJeu {
 
     public void afficherGrilleSurConsole() {
         String afficher_ligne = "";
-        for (int i = 0; i < 6; i++) {
+        for (int x = 0; x < 6; x++) {
             afficher_ligne = "";
-            for (int j = 0; j < 7; j++) {
-                afficher_ligne += "[" + grille[i][j].toString() + "]";
+            for (int y = 0; y < 7; y++) {
+                afficher_ligne += "[" + grille[x][y].toString() + "]";
+            }
+            System.out.println(afficher_ligne);
+        }
+    }
+    
+    public void afficherGrille() {
+        String afficher_ligne = "";
+        for (int x = 0; x < 6; x++) {
+            afficher_ligne = "";
+            for (int y = 0; y < 7; y++) {
+                afficher_ligne += "[" + x +","+ y + "]";
             }
             System.out.println(afficher_ligne);
         }
@@ -150,13 +161,13 @@ public class PlateauDeJeu {
         return (grille[x][y].presenceTrouNoir());
     }
     public void placerTrouNoir(int x,int y) {
-        grille[x][y].presenceTrouNoir();
+        grille[x][y].placerTrouNoir();
     }
     public void supprimerTrouNoir(int x,int y) {
         grille[x][y].supprimerTrouNoir();
     }
     public void placerDesintegrateur(int x,int y) {
-        grille[x][y].presenceDesintegrateur();
+        grille[x][y].placerDesintegrateur();
     }
     public void supprimerDesintegrateur(int x,int y) {
         grille[x][y].supprimerDesintegrateur();
