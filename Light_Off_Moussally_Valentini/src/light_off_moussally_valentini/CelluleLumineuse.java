@@ -11,7 +11,7 @@ package light_off_moussally_valentini;
 public class CelluleLumineuse {
 
     boolean allume = false;
-    
+
     public boolean est_allume() {//cette methode permet de savoir si la case est allumée ou pas?
         if (allume == true) {
             return true;
@@ -20,13 +20,24 @@ public class CelluleLumineuse {
         }
 
     }
-    
-    public void change(){//cette methode permet de d'allumer ou d'eteindre la case que l'on souhaite
-        if (allume==false){
-            allume=true;
-        }else{
-            allume=false;
-        }    
+
+    public void change() {//cette methode permet de d'allumer ou d'eteindre la case que l'on souhaite
+        if (allume == false) {
+            allume = true;
+        } else {
+            allume = false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        if (this.est_allume() == false) {
+            return "o";
+        } 
+        if(this.est_allume() == true){
+            return "x";
+        }
+        return "A";
     }
 
 }
