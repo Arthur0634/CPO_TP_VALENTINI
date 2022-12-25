@@ -11,7 +11,6 @@ package light_off_moussally_valentini;
 public class Grille {
 
     CelluleLumineuse[][] Plateau ;//on crée un tablea de 5 lignes et 5 colonnes qui contient les 25 cellules lumineuses
-    boolean verif = false;
     int TailleGrille = 5;
  
     public Grille(int TailleGrilleACreer)
@@ -27,6 +26,7 @@ public class Grille {
     }
 
     public boolean Grille_vide() {
+        boolean verif = false;
         for (int i = 0; i < TailleGrille; i++) { //on balaye chaque cellule du tableau 
             for (int j = 0; j < TailleGrille; j++) {
                 if (Plateau[i][j].est_allume() == true) { //si une cellule est allumé , la variable verif va passer a true 
