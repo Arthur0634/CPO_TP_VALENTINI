@@ -68,7 +68,6 @@ public class Partie {
             ligne = (int) alea; //puis on recupere la partie entiere de ce double pour avoir un indice de ligne aleatoire
 
             //pareil pour les colonnes
-
             alea = Math.random() * 7;
 
             colonne = (int) alea;
@@ -85,7 +84,7 @@ public class Partie {
 
             }
 
-            plateau.placerTrouNoir(ligne ,colonne );
+            plateau.placerTrouNoir(ligne, colonne);
 
             plateau.placerDesintegrateur(ligne, colonne);
 
@@ -144,12 +143,7 @@ public class Partie {
         }
 
     }
-    
-    
-    
-    
-    
-    
+
     public void initialiserPartie() {
         attribuerCouleurAuxJoueurs();
         creerEtAffecterJeton(listeJoueurs[0]);
@@ -157,16 +151,13 @@ public class Partie {
         placerTrousNoirsEtDesintegrateurs();
     }
 
-    
-    
-    
-    
     public void lancerPartie() {
 
         joueurCourant = listeJoueurs[0];//le joueur classé en premier comence
         boolean fini = true;
         boolean recupOK = false;
         int test = 0;
+        boolean sauterTour = false;
 
         while (fini) { //tant que la partie n'est pas finie
 
@@ -177,17 +168,21 @@ public class Partie {
             }
             Scanner sc;
             int colonneJouee;
-            int ligne;
+            int ligne = 111;
 
             sc = new Scanner(System.in);
             for (int p = 0; p < 2; p++) {
-
-                plateau.afficherGrilleSurConsole();
-                joueurCourant = listeJoueurs[p];
+                if (sauterTour == true) {
+                    plateau.afficherGrilleSurConsole();
+                    sauterTour=false;
+                } else {
+                    plateau.afficherGrilleSurConsole();
+                    joueurCourant = listeJoueurs[p];
+                }
 
                 System.out.println("A " + joueurCourant + " (couleur " + joueurCourant.getCouleur() + " de jouer )");
                 System.out.println(joueurCourant.getReserveJetons().size() + " jetons restant"); //on utilise la fonction size() pour indiquer le nombre de jetons restants
-                System.out.println("que voulez vous faire? 1 pour placer jeton 2 pour recuperer jeton 3 pour desintegrer");
+                System.out.println("que voulez vous faire? \n1) pour placer jeton \n2) pour recuperer jeton \n3) pour desintegrer");
                 int rep = sc.nextInt();
                 if (rep == 1) { //on va creer trois cas possible a chaque coups jouer
                     System.out.println("Sur qu'elle colonne voulez vous jouez ?"
@@ -204,23 +199,30 @@ public class Partie {
                         System.out.println("La colonne est plein"
                                 + "\nIl faut choisir une autre colonne");
                     } else {
-                        for (int i = 5; i > 0; i--) {
+                        for (int i = 5; i > -1; i--) {
                             if (!plateau.presenceJeton(i, col)) {
                                 ligne = i;
+                                break;
 
                             }
-                            
+
                         }
                         Jeton jetonCourant = joueurCourant.jouerJeton();
-                        plateau.ajouterJetonDansColonne(jetonCourant, col);
-                        System.out.println("Votre jeton a bien ete joue");
-                        if (plateau.presenceTrouNoir(ligne ,col)){
+                        System.out.println(ligne);
+                        if (plateau.presenceTrouNoir(ligne, col)) {
                             plateau.supprimerTrouNoir(ligne, col);
                             plateau.supprimerJeton(ligne, col);
+                        } else {
+                            plateau.ajouterJetonDansColonne(jetonCourant, col);
+                            System.out.println("Votre jeton a bien ete joue");
+                        }
+                        if (plateau.presenceDesintegrateur(ligne, col)) {
+                            joueurCourant.ObtenirDesintegrateur();
+                            plateau.supprimerDesintegrateur(ligne, col);
+                            System.out.println(joueurCourant.acessDesintegrateur());
                         }
 
                     }
-                    
 
                 }
                 if (rep == 2) {
@@ -266,6 +268,20 @@ public class Partie {
                     joueurCourant.ajouterJeton(plateau.recupererJeton(ligneJouee - 1, colonneJouee - 1)); //on enleve le jeton et on le redonne au joueur
 
                     plateau.tasserColonne(colonneJouee - 1);
+
+                } else if (rep == 3) {
+                    if (joueurCourant.acessDesintegrateur() != 0) {
+                        System.out.println("choisissez la ligne de la case que vous voulez desintegrer");
+                        int ligned = sc.nextInt();
+                        System.out.println("choisissez la colonne de la case que vous voulez desintegrer");
+                        int colonned = sc.nextInt();
+                        plateau.supprimerJeton(ligned - 1, colonned - 1);
+                        joueurCourant.utiliserDesintegrateur();
+                        plateau.tasserColonne(colonned - 1);
+                    } else {
+                        System.out.println("vous n'avez pas de desintegrateur.");
+                        sauterTour = true;
+                    }
 
                 }
 
