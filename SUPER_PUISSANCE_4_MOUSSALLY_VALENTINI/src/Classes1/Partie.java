@@ -174,7 +174,7 @@ public class Partie {
             for (int p = 0; p < 2; p++) {
                 if (sauterTour == true) {
                     plateau.afficherGrilleSurConsole();
-                    sauterTour=false;
+                    sauterTour = false;
                 } else {
                     plateau.afficherGrilleSurConsole();
                     joueurCourant = listeJoueurs[p];
